@@ -40,15 +40,19 @@
 #   in the nvp config.
 #   Defaults to false.
 #
+#
+
 class neutron::plugins::nsx (
   $default_overlay_tz   = $::os_service_default,
   $default_tier0_router = $::os_service_default,
   $nsx_api_managers     = $::os_service_default,
   $nsx_api_user         = $::os_service_default,
   $nsx_api_password     = $::os_service_default,
-  $dhcp_profile_uuid    = $::os_service_default,
-  $metadata_proxy_uuid  = $::os_service_default,
+  $dhcp_profile    	= $::os_service_default,
+  $metadata_proxy 	= $::os_service_default,
   $native_dhcp_metadata = $::os_service_default,
+  $default_edge_cluster_uuid = $::os_service_default,
+  $native_metadata_route = $::os_service_default,
   $package_ensure       = 'present',
   $purge_config         = false,
 ) {
@@ -99,9 +103,11 @@ class neutron::plugins::nsx (
     'nsx_v3/nsx_api_managers':     value => $nsx_api_managers;
     'nsx_v3/nsx_api_user':         value => $nsx_api_user;
     'nsx_v3/nsx_api_password':     value => $nsx_api_password;
-    'nsx_v3/dhcp_profile_uuid':    value => $dhcp_profile_uuid;
-    'nsx_v3/metadata_proxy_uuid':  value => $metadata_proxy_uuid;
+    'nsx_v3/dhcp_profile':    value => $dhcp_profile;
+    'nsx_v3/metadata_proxy':  value => $metadata_proxy;
     'nsx_v3/native_dhcp_metadata': value => $native_dhcp_metadata;
+    'nsx_v3/native_metadata_route': value => $native_metadata_route;
+    'nsx_v3/default_edge_cluster_uuid': value => $default_edge_cluster_uuid;
   }
 
   if ($::neutron::core_plugin != 'vmware_nsx.plugin.NsxV3Plugin') and
