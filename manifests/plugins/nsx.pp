@@ -11,6 +11,9 @@
 #   UUID of the pre-created default tier0 (provider) router on NSX backend.
 #   This option is used to create external networks and MUST be specified.
 #
+# [*default_edge_cluster_uuid*]
+#   UUID of edge cluster.
+#
 # [*nsx_api_managers*]
 #   Comma separated NSX manager IP addresses. This option MUST be specified.
 #
@@ -20,16 +23,19 @@
 # [*nsx_api_password*]
 #   The password for NSX manager.
 #
-# [*dhcp_profile_uuid*]
+# [*dhcp_profile*]
 #   UUID of the pre-created DHCP profile on NSX backend to support native DHCP.
 #   This option MUST be specified if native_dhcp_metadata is True.
 #
-# [*metadata_proxy_uuid*]
+# [*metadata_proxy*]
 #   UUID of the pre-created Metadata Proxy on NSX backend. This option MUST
 #   be specified if native_dhcp_metadata is True.
 #
 # [*native_dhcp_metadata*]
 #   Flag to enable native DHCP and Metadata.
+# 
+# [*native_metadata_route*]
+#   Native metadata route.
 #
 # [*package_ensure*]
 #   (optional) Ensure state for package.
@@ -98,15 +104,15 @@ class neutron::plugins::nsx (
   }
 
   neutron_plugin_nsx {
-    'nsx_v3/default_overlay_tz':   value => $default_overlay_tz;
-    'nsx_v3/default_tier0_router': value => $default_tier0_router;
-    'nsx_v3/nsx_api_managers':     value => $nsx_api_managers;
-    'nsx_v3/nsx_api_user':         value => $nsx_api_user;
-    'nsx_v3/nsx_api_password':     value => $nsx_api_password;
-    'nsx_v3/dhcp_profile':    value => $dhcp_profile;
-    'nsx_v3/metadata_proxy':  value => $metadata_proxy;
-    'nsx_v3/native_dhcp_metadata': value => $native_dhcp_metadata;
-    'nsx_v3/native_metadata_route': value => $native_metadata_route;
+    'nsx_v3/default_overlay_tz':   	value => $default_overlay_tz; ##
+    'nsx_v3/default_tier0_router': 	value => $default_tier0_router; ##
+    'nsx_v3/nsx_api_managers':     	value => $nsx_api_managers; ##
+    'nsx_v3/nsx_api_user':         	value => $nsx_api_user; ##
+    'nsx_v3/nsx_api_password':     	value => $nsx_api_password; ##
+    'nsx_v3/dhcp_profile':    	   	value => $dhcp_profile;
+    'nsx_v3/metadata_proxy':  		value => $metadata_proxy;
+    'nsx_v3/native_dhcp_metadata': 	value => $native_dhcp_metadata; ##
+    'nsx_v3/native_metadata_route': 	value => $native_metadata_route;
     'nsx_v3/default_edge_cluster_uuid': value => $default_edge_cluster_uuid;
   }
 
